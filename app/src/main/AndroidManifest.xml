@@ -2,9 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.matheus.gestaog2app">
 
-
-    <uses-permission android:name="android.permission.INTERNET"/>
-
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -24,7 +22,15 @@
             android:label="@string/title_activity_navigation"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".cadastramento" />
-        <activity android:name=".consultas"></activity>
+        <activity android:name=".consultas" />
+        <activity
+            android:name=".CadastroUsuario"
+            android:label="@string/title_activity_cadastro_usuario"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ListaUsuarios"
+            android:label="@string/title_activity_lista_usuarios"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

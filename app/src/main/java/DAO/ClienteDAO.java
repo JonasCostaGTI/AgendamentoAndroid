@@ -16,7 +16,7 @@ import MODEL.Cliente;
 /**
  * Created by jonascosta on 27/05/16.
  */
-public class DAO {
+public class ClienteDAO {
 
     public Cliente[] lista(){
 
@@ -88,14 +88,8 @@ public class DAO {
 
         Client client = ClientBuilder.newClient();
 
-        //WebTarget webTarget = client.target("http://192.168.1.102:8081/Agendamento/service/clientes").path("/Lista");
         WebTarget webTarget = client.target("http://api.openweathermap.org/data/2.5/weather?q=Gravatai&units=metric&appid=9c4b5927647bc9947f6f4c2be948cb4e");
         String tempJson = webTarget.request().get(String.class);
-
-
-
-
-
 
         Log.w("tempo", tempJson);
         return tempJson;

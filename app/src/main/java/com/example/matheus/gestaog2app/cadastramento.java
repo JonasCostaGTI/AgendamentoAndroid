@@ -8,13 +8,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import DAO.DAO;
+import DAO.ClienteDAO;
 import MODEL.Cliente;
 
 public class cadastramento extends AppCompatActivity {
@@ -25,7 +24,7 @@ public class cadastramento extends AppCompatActivity {
     private boolean alterado = false;
 
     Cliente clienteObjeto = new Cliente();
-    DAO dao = new DAO();
+    ClienteDAO clienteDao = new ClienteDAO();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,8 +96,8 @@ public class cadastramento extends AppCompatActivity {
                         // salvar
                         Log.w("Aqui", clienteObjeto.toString());
 
-                        dao.salvar(clienteObjeto);
-                        dao.lista();
+                        clienteDao.salvar(clienteObjeto);
+                        clienteDao.lista();
                         finish();
                     }
                 }
@@ -128,8 +127,8 @@ public class cadastramento extends AppCompatActivity {
                     public void onClick(View v) {
 
                         clienteObjeto.setId(id);
-                        dao.deletar(clienteObjeto);
-                        dao.lista();
+                        clienteDao.deletar(clienteObjeto);
+                        clienteDao.lista();
                         finish();
 
                     }
@@ -172,7 +171,7 @@ public class cadastramento extends AppCompatActivity {
                 return true;
 
             case 3:
-                Intent l = new Intent(this, Navigation.class);
+                Intent l = new Intent(this, consultas.class);
                 startActivityForResult(l, RETURNCODE);
                 return true;
         }

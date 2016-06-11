@@ -1,14 +1,8 @@
 package com.example.matheus.gestaog2app;
 
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,7 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import DAO.DAO;
+import DAO.ClienteDAO;
 import MODEL.Cliente;
 
 public class consultas extends AppCompatActivity {
@@ -46,8 +40,11 @@ public class consultas extends AppCompatActivity {
         super.onCreateOptionsMenu(menu);
 
         menu.add(0, 0, 0, "Cadastrar Cliente");
-        menu.add(0, 1, 0, "Tela Login");
-        menu.add(0, 2, 0, "Navegação");
+        menu.add(0, 1, 0, "Cadastrar Usuario");
+        menu.add(0, 2, 0, "Tela Login");
+        menu.add(0, 3, 0, "Navegação");
+        menu.add(0, 4, 0, "Lista de Usuarios");
+
 
         return true;
     }
@@ -63,13 +60,23 @@ public class consultas extends AppCompatActivity {
                 return true;
 
             case 1:
-                Intent j = new Intent(this, Login.class);
+                Intent j = new Intent(this, CadastroUsuario.class);
                 startActivityForResult(j, RETURNCODE);
                 return true;
 
             case 2:
-                Intent k = new Intent(this, Navigation.class);
+                Intent k = new Intent(this, Login.class);
                 startActivityForResult(k, RETURNCODE);
+                return true;
+
+            case 3:
+                Intent l = new Intent(this, Navigation.class);
+                startActivityForResult(l, RETURNCODE);
+                return true;
+
+            case 4:
+                Intent m = new Intent(this, ListaUsuarios.class);
+                startActivityForResult(m, RETURNCODE);
                 return true;
         }
 
@@ -86,11 +93,10 @@ public class consultas extends AppCompatActivity {
 
     private void mostraLista() {
 
-        Cliente cliente = new Cliente();
-        DAO dao = new DAO();
+        //Cliente cliente = new Cliente();
+        ClienteDAO clienteDao = new ClienteDAO();
         listaClientes = (ListView)findViewById(R.id.listView);
-        clientes = dao.lista();
-
+        clientes = clienteDao.lista();
         ArrayAdapter<Cliente> dataClientes =  new ArrayAdapter<Cliente>(this, android.R.layout.simple_list_item_1, clientes);
 
         //pega item selecionado

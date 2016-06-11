@@ -15,7 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
-import DAO.DAO;
+import DAO.ClienteDAO;
 
 public class Navigation extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -29,8 +29,8 @@ public class Navigation extends AppCompatActivity implements NavigationView.OnNa
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DAO dao = new DAO();
-        String temperatura = dao.tempo();
+        ClienteDAO clienteDao = new ClienteDAO();
+        String temperatura = clienteDao.tempo();
         EditText temp = (EditText) findViewById(R.id.temperatura);
 
 
