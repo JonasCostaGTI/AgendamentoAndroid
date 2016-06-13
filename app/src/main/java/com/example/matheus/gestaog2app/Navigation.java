@@ -1,6 +1,7 @@
 package com.example.matheus.gestaog2app;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,8 +15,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import DAO.ClienteDAO;
+import ServiceTempo.ServiceTempoDAO;
+import ServiceTempo.Tempo;
 
 public class Navigation extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -29,12 +33,17 @@ public class Navigation extends AppCompatActivity implements NavigationView.OnNa
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ClienteDAO clienteDao = new ClienteDAO();
-        String temperatura = clienteDao.tempo();
+
+        ServiceTempoDAO serviceTempoDAO = new ServiceTempoDAO();
+        Tempo tempo = serviceTempoDAO.temperatura();
+
         EditText temp = (EditText) findViewById(R.id.temperatura);
+        temp.setText(tempo.getMain().getTemp());
+
+        EditText condicao = (EditText) findViewById(R.id.condicao);
+        condicao.setText(tempo.getWeather().get(0).getDescription());
 
 
-        temp.setText(temperatura);
 
 
 

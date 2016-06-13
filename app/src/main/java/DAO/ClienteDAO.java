@@ -81,20 +81,5 @@ public class ClienteDAO {
 
     }
 
-    public String tempo(){
-
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-
-        Client client = ClientBuilder.newClient();
-
-        WebTarget webTarget = client.target("http://api.openweathermap.org/data/2.5/weather?q=Gravatai&units=metric&appid=9c4b5927647bc9947f6f4c2be948cb4e");
-        String tempJson = webTarget.request().get(String.class);
-
-        Log.w("tempo", tempJson);
-        return tempJson;
-
-    }
-
 
 }
