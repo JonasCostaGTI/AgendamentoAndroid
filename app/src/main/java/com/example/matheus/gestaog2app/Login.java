@@ -34,10 +34,10 @@ public class Login extends AppCompatActivity {
                 Usuario[] usuarios = usuarioDAO.lista();
 
 
+                boolean encontrou = false;
                 for (Usuario user: usuarios) {
 
-                    if(user.getUsuario().toString().equals(login.getText().toString()) &&
-                            user.getSenha().toString().equals(senha.getText().toString())){
+                    if(user.getUsuario().toString().equals(login.getText().toString()) && user.getSenha().toString().equals(senha.getText().toString())){
 
                         Toast toast = Toast.makeText(getApplicationContext(), "Bem vindo " + login.getText().toString(), Toast.LENGTH_LONG);
                         toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
@@ -49,17 +49,18 @@ public class Login extends AppCompatActivity {
 
                         startActivity(intent);
                         finish();
-
-                    }else{
-
-                        Toast toast = Toast.makeText(getApplicationContext(), "Usuario ou senha invalidos ", Toast.LENGTH_SHORT);
-                        toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
-                        toast.show();
-
-                        login.setText("");
-                        senha.setText("");
+                        encontrou = true;
 
                     }
+                }
+
+                if(!encontrou){
+                    Toast toast = Toast.makeText(getApplicationContext(), "Usuario ou senha invalidos ", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
+                    toast.show();
+
+                    login.setText("");
+                    senha.setText("");
                 }
 
 
