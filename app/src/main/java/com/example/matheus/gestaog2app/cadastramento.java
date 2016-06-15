@@ -148,7 +148,7 @@ public class cadastramento extends AppCompatActivity {
 
 
         menu.add(0, 1, 0, "Tela Login");
-        menu.add(0, 2, 0, "Navegação");
+        menu.add(0, 2, 0, "Menu Inicial");
         menu.add(0, 3, 0, "Consulta");
 
         return true;

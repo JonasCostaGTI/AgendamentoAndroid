@@ -153,7 +153,7 @@ public class CadastroUsuario extends AppCompatActivity {
 
         menu.add(0, 0, 0, "Cadastrar Cliente");
         menu.add(0, 2, 0, "Tela Login");
-        menu.add(0, 3, 0, "Navegação");
+        menu.add(0, 3, 0, "Menu Inicial");
 
 
         return true;

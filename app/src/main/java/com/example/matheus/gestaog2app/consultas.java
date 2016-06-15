@@ -42,7 +42,7 @@ public class consultas extends AppCompatActivity {
         menu.add(0, 0, 0, "Cadastrar Cliente");
         menu.add(0, 1, 0, "Cadastrar Usuario");
         menu.add(0, 2, 0, "Tela Login");
-        menu.add(0, 3, 0, "Navegação");
+        menu.add(0, 3, 0, "Menu Inicial");
         menu.add(0, 4, 0, "Lista de Usuarios");
 
 
