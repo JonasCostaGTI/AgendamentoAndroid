@@ -12,6 +12,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 
 import MODEL.Cliente;
+import Utils.Constants;
 
 /**
  * Created by jonascosta on 27/05/16.
@@ -25,7 +26,8 @@ public class ClienteDAO {
 
         Client client = ClientBuilder.newClient();
 
-        WebTarget webTarget = client.target("http://192.168.1.102:8081/Agendamento/service/clientes").path("/Lista");
+        //192.168.1.102 casa
+        WebTarget webTarget = client.target(Constants.URL+"/clientes").path("/Lista");
         String clienteJson = webTarget.request().get(String.class);
 
         //close a conexao
@@ -51,7 +53,8 @@ public class ClienteDAO {
 
         Client client = ClientBuilder.newClient();
 
-        WebTarget webTarget = client.target("http://192.168.1.102:8081/Agendamento/service/clientes").path("/Salvar");
+        //192.168.1.102 casa
+        WebTarget webTarget = client.target(Constants.URL+"/clientes").path("/Salvar");
 
         //feixa conexao
         Response response = webTarget.path("service").request().get();
@@ -73,7 +76,9 @@ public class ClienteDAO {
     public void deletar(Cliente clienteDeletar){
 
         Client client = ClientBuilder.newClient();
-        WebTarget webTarget = client.target("http://192.168.1.102:8081/Agendamento/service/clientes");
+
+        //192.168.1.102 casa
+        WebTarget webTarget = client.target(Constants.URL+"/clientes");
         WebTarget webTargetExcluir = webTarget.path("{codigo}").resolveTemplate("codigo", clienteDeletar.getId());
 
         //requisicao para deletar

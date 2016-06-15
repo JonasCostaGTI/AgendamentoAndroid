@@ -122,7 +122,25 @@ public class Navigation extends AppCompatActivity implements NavigationView.OnNa
             startActivity(intent);
 
             finish();
+
+        }else if(id == R.id.CadastroUsuarios){
+            Intent intent = new Intent();
+            intent.setClass(Navigation.this,
+                    CadastroUsuario.class);
+
+            startActivity(intent);
+
+            finish();
+        }else if(id == R.id.ListaUsuarios){
+            Intent intent = new Intent();
+            intent.setClass(Navigation.this,
+                    ListaUsuarios.class);
+
+            startActivity(intent);
+
+            finish();
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

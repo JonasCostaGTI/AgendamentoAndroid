@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response;
 
 import MODEL.Cliente;
 import MODEL.Usuario;
+import Utils.Constants;
 
 /**
  * Created by jonascosta on 27/05/16.
@@ -26,7 +27,8 @@ public class UsuarioDAO {
 
         Client client = ClientBuilder.newClient();
 
-        WebTarget webTarget = client.target("http://192.168.1.102:8081/Agendamento/service/usuarios").path("/Lista");
+        //192.168.1.102 casa
+        WebTarget webTarget = client.target(Constants.URL+"/usuarios").path("/Lista");
         String usuarioJson = webTarget.request().get(String.class);
 
         //close a conexao
@@ -52,7 +54,8 @@ public class UsuarioDAO {
 
         Client client = ClientBuilder.newClient();
 
-        WebTarget webTarget = client.target("http://192.168.1.102:8081/Agendamento/service/usuarios").path("/Salvar");
+        //192.168.1.102 casa
+        WebTarget webTarget = client.target(Constants.URL+"/usuarios").path("/Salvar");
 
         //feixa conexao
         Response response = webTarget.path("service").request().get();
@@ -74,7 +77,8 @@ public class UsuarioDAO {
     public void deletar(Usuario usuarioDeletar){
 
         Client client = ClientBuilder.newClient();
-        WebTarget webTarget = client.target("http://192.168.1.102:8081/Agendamento/service/usuarios");
+        //192.168.1.102 casa
+        WebTarget webTarget = client.target(Constants.URL+"/usuarios");
         WebTarget webTargetExcluir = webTarget.path("{codigo}").resolveTemplate("codigo", usuarioDeletar.getId());
 
         //requisicao para deletar
@@ -82,26 +86,6 @@ public class UsuarioDAO {
 
     }
 
-//    public Usuario buscaPorId(Usuario usuarioId){
-//
-//
-//        Client client = ClientBuilder.newClient();
-//        WebTarget webTarget = client.target("http://192.168.1.102:8081/Agendamento/service/usuarios");
-//        WebTarget usuarioWebTarget = webTarget.path("{codigo}").resolveTemplate("codigo", usuarioId.getId());
-//
-//
-//        String usuarioJson =  webTarget.request().get(String.class);
-//
-//        Gson gson = new Gson();
-//        Usuario usuario = new Usuario();
-//        usuario = gson.fromJson(usuarioJson, Usuario.class);
-//
-//        Log.w("Usuario", usuario.getNome().toString());
-//
-//
-//        return usuario;
-//
-//    }
 
 
 
