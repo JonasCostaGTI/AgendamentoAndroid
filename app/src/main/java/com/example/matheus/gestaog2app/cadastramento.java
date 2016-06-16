@@ -106,8 +106,10 @@ public class cadastramento extends AppCompatActivity {
                         Mail mail = new Mail();
 
                         String[] toArr = {"jonas.costa1987@gmail.com"};
+
                         mail.set_to(toArr);
-                        mail.setBody("Voce tem um cliente novo!");
+                        mail.setBody("Voce tem um cliente novo agendado para: " + clienteObjeto.getHorario()+
+                        " No dia: " + clienteObjeto.getDia() + "\n O Cliente: " + clienteObjeto.getNome() + " Agendou o Servico de " + clienteObjeto.getServico());
 
                         try {
 

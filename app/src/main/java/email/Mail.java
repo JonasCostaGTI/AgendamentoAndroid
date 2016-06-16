@@ -50,7 +50,7 @@ public class Mail extends javax.mail.Authenticator {
         _pass = "j25n1887"; // password
         _from = "jonas.costa1987@gmail.com"; // email sent from
         _subject = "Novo Horario Agendado"; // email subject
-        _body = "Voce tem um novo Cliente agendado"; // email body
+        _body = ""; // email body
 
         _debuggable = false; // debug mode on or off - default off
         _auth = true; // smtp authentication - default on
