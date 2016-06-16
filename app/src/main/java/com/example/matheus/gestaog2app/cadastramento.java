@@ -1,10 +1,12 @@
 package com.example.matheus.gestaog2app;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,13 +14,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import DAO.ClienteDAO;
 import MODEL.Cliente;
+import email.Mail;
 
 public class cadastramento extends AppCompatActivity {
 
-
+    Context context;
     public static final int RETURNCODE = 200;
     private int id;
     private boolean alterado = false;
@@ -37,6 +41,7 @@ public class cadastramento extends AppCompatActivity {
         servico.setAdapter(adapter);
 
 
+        //context = this;
 
 
         if (this.getIntent().hasExtra("ID")) {
@@ -97,7 +102,36 @@ public class cadastramento extends AppCompatActivity {
                         Log.w("Aqui", clienteObjeto.toString());
 
                         clienteDao.salvar(clienteObjeto);
+
+                        Mail mail = new Mail();
+
+                        String[] toArr = {"jonas.costa1987@gmail.com"};
+                        mail.set_to(toArr);
+                        mail.setBody("Voce tem um cliente novo!");
+
+                        try {
+
+                            if(mail.send()){
+                                Toast toast = Toast.makeText(getApplicationContext(), "Email enviado", Toast.LENGTH_SHORT);
+                                toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
+                                toast.show();
+                            }else{
+                                Toast toast = Toast.makeText(getApplicationContext(), "Falha ao enviar email", Toast.LENGTH_SHORT);
+                                toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
+                                toast.show();
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
                         clienteDao.lista();
+
+
+
+
+
+
                         finish();
                     }
                 }
