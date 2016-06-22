@@ -37,7 +37,9 @@
         android:ems="10"
         android:id="@+id/senha_usuario"
         android:layout_alignTop="@+id/textView2"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:hint="Senha"
+        android:maxLength="8" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -48,7 +50,11 @@
         android:layout_alignStart="@+id/senha_usuario"
         android:layout_alignRight="@+id/senha_usuario"
         android:layout_alignEnd="@+id/senha_usuario"
-        android:inputType="none" />
+        android:inputType="text"
+        android:hint="Login"
+        android:maxLength="8"
+        android:linksClickable="false"
+        android:layout_alignParentEnd="false" />
 
     <Button
         android:layout_width="wrap_content"

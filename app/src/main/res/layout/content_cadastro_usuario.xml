@@ -78,7 +78,9 @@
         android:layout_above="@+id/label2"
         android:layout_toRightOf="@+id/btn_salvar_usuario"
         android:layout_alignRight="@+id/btn_apagar_usuario"
-        android:layout_alignEnd="@+id/btn_apagar_usuario" />
+        android:layout_alignEnd="@+id/btn_apagar_usuario"
+        android:hint="Nome"
+        android:maxLength="20" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -88,7 +90,9 @@
         android:layout_alignLeft="@+id/nome_usuario"
         android:layout_alignStart="@+id/nome_usuario"
         android:layout_alignRight="@+id/nome_usuario"
-        android:layout_alignEnd="@+id/nome_usuario" />
+        android:layout_alignEnd="@+id/nome_usuario"
+        android:hint="Login"
+        android:maxLength="8" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -100,5 +104,7 @@
         android:layout_alignLeft="@+id/login_usuario"
         android:layout_alignStart="@+id/login_usuario"
         android:layout_alignRight="@+id/login_usuario"
-        android:layout_alignEnd="@+id/login_usuario" />
+        android:layout_alignEnd="@+id/login_usuario"
+        android:hint="Senha"
+        android:maxLength="8" />
 </RelativeLayout>

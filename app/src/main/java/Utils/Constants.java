@@ -7,7 +7,7 @@ public interface Constants {
     //facensa 192.168.20.55
     //casa 192.168.1.102
 
-    public static final String IP = "192.168.1.102";
+    public static final String IP = "172.20.10.2";
     public static final String PORT = "8081";
     public static final String SERVICE = "/Agendamento/service";
     public static final String PROTOCOL = "http";

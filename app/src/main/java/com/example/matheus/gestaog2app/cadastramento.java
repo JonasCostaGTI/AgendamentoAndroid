@@ -1,21 +1,11 @@
 package com.example.matheus.gestaog2app;
 
-import android.Manifest;
-import android.app.Activity;
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.pm.PackageManager;
-import android.os.Build;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,6 +15,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import java.util.*;
+
+
+
 
 import DAO.ClienteDAO;
 import MODEL.Cliente;
@@ -112,21 +107,8 @@ public class cadastramento extends AppCompatActivity {
                         clienteDao.salvar(clienteObjeto);
 
 
-
-
-                        String SENT = "SMS_SENT";
-
-                        PendingIntent sentPI = PendingIntent.getBroadcast(getApplicationContext(), 0, new Intent(SENT), 0);
-
-                        SmsManager smsManager = SmsManager.getDefault();
-                        smsManager.sendTextMessage("5191039301", null, "Ola Mundo", sentPI, null);
-
-
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            if (checkSelfPermission(Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-                                requestPermissions(new String[]{Manifest.permission.SEND_SMS}, 10061);
-                            }
-                        }
+//                        SmsManager smsManager = SmsManager.getDefault();
+//                        smsManager.sendTextMessage("05191039301", null, "Ola mundo", null, null);
 
 
                         Mail mail = new Mail();
@@ -173,6 +155,7 @@ public class cadastramento extends AppCompatActivity {
                             field.setError("campo deve ser preexido");
                         }
 
+
                     }
 
                     return empty;
@@ -200,6 +183,7 @@ public class cadastramento extends AppCompatActivity {
 
 
     }
+
 
 
     @Override
