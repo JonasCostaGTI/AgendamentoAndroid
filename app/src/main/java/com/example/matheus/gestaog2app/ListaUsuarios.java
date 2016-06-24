@@ -13,8 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import DAO.UsuarioDAO;
-import MODEL.Cliente;
+import ServiceAgendamento.UsuarioDAO;
 import MODEL.Usuario;
 
 public class ListaUsuarios extends AppCompatActivity {

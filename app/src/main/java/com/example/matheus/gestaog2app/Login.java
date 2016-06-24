@@ -10,10 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import DAO.UsuarioDAO;
+import ServiceAgendamento.UsuarioDAO;
 import MODEL.Usuario;
-import ServiceTempo.ServiceTempoDAO;
-import ServiceTempo.Tempo;
 
 public class Login extends AppCompatActivity {
 

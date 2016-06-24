@@ -10,7 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import DAO.ClienteDAO;
+import ServiceAgendamento.ClienteDAO;
 import MODEL.Cliente;
 
 public class consultas extends AppCompatActivity {

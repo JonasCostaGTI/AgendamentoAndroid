@@ -5,21 +5,18 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
-import DAO.ClienteDAO;
+import ServiceAgendamento.ClienteDAO;
 import MODEL.Cliente;
 import ServiceEmail.EmailDAO;
 import ServiceEmail.VerificadorEmail;

@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import DAO.UsuarioDAO;
+import ServiceAgendamento.UsuarioDAO;
 import MODEL.Usuario;
 
 public class CadastroUsuario extends AppCompatActivity {
