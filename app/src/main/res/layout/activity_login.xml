@@ -15,20 +15,25 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/nome"
         android:id="@+id/textView3"
+        android:textColor="#062ef6"
+        android:textSize="20dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2"
+        android:layout_marginTop="81dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/senha"
-        android:layout_marginTop="33dp"
         android:id="@+id/textView2"
-        android:layout_below="@+id/login_usuario"
+        android:textColor="#062ef6"
+        android:textSize="20dp"
+        android:layout_above="@+id/btnEntrar"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="99dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -36,36 +41,33 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/senha_usuario"
-        android:layout_alignTop="@+id/textView2"
-        android:layout_centerHorizontal="true"
         android:hint="Senha"
-        android:maxLength="8" />
+        android:maxLength="8"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_alignLeft="@+id/btnEntrar"
+        android:layout_alignStart="@+id/btnEntrar" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/login_usuario"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/senha_usuario"
-        android:layout_alignStart="@+id/senha_usuario"
-        android:layout_alignRight="@+id/senha_usuario"
-        android:layout_alignEnd="@+id/senha_usuario"
         android:inputType="text"
         android:hint="Login"
         android:maxLength="8"
         android:linksClickable="false"
-        android:layout_alignParentEnd="false" />
+        android:layout_alignTop="@+id/textView3"
+        android:layout_alignLeft="@+id/senha_usuario"
+        android:layout_alignStart="@+id/senha_usuario"
+        android:layout_alignRight="@+id/senha_usuario"
+        android:layout_alignEnd="@+id/senha_usuario" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/entrar"
         android:id="@+id/btnEntrar"
-        android:layout_marginTop="27dp"
-        android:layout_below="@+id/senha_usuario"
-        android:layout_alignLeft="@+id/senha_usuario"
-        android:layout_alignStart="@+id/senha_usuario"
-        android:layout_marginLeft="40dp"
-        android:layout_marginStart="40dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="124dp" />
 
 </RelativeLayout>

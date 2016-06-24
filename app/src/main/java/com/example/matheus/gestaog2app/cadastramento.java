@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.Menu;
@@ -16,13 +15,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.*;
-
-
-
 
 import DAO.ClienteDAO;
 import MODEL.Cliente;
+import ServiceEmail.EmailDAO;
+import ServiceEmail.VerificadorEmail;
 import email.Mail;
 
 public class cadastramento extends AppCompatActivity {
@@ -88,8 +85,11 @@ public class cadastramento extends AppCompatActivity {
                     Spinner servico = (Spinner) findViewById(R.id.spinner);
 
 
+                    boolean emailValidoService = false;
+                    emailValidoService = serviceValidaEmail(email);
 
-                    if (!campos(nome, telefone, cpf, data, hora, email)) {
+
+                    if (!campos(nome, telefone, cpf, data, hora, email) && emailValidoService) {
 
                         if (alterado){
                             clienteObjeto.setId(id);
@@ -103,44 +103,43 @@ public class cadastramento extends AppCompatActivity {
                         clienteObjeto.setHorario(hora.getText().toString());
                         clienteObjeto.setDia(data.getText().toString());
 
+                        boolean salvou;
+                        salvou = clienteDao.salvar(clienteObjeto);
 
-                        clienteDao.salvar(clienteObjeto);
+                        if(salvou) {
 
+                            Mail mail = new Mail();
+                            String[] toArr = {"jonas.costa1987@gmail.com", clienteObjeto.getEmail()};
+                            mail.set_to(toArr);
 
-//                        SmsManager smsManager = SmsManager.getDefault();
-//                        smsManager.sendTextMessage("05191039301", null, "Ola mundo", null, null);
+                            mail.setBody("Horario agendado para: " + clienteObjeto.getHorario() +
+                                    " No dia: " + clienteObjeto.getDia() +
+                                    "\n O Cliente: " + clienteObjeto.getNome() +
+                                    " Servico agendado " + clienteObjeto.getServico());
 
+                            try {
 
-                        Mail mail = new Mail();
-                        String[] toArr = {"jonas.costa1987@gmail.com"};
-                        mail.set_to(toArr);
-                        mail.setBody("Voce tem um cliente novo agendado para: " + clienteObjeto.getHorario()+
-                        " No dia: " + clienteObjeto.getDia() + "\n O Cliente: " + clienteObjeto.getNome() + " Agendou o Servico de " + clienteObjeto.getServico());
+                                if (mail.send()) {
+                                    Toast toast = Toast.makeText(getApplicationContext(), "Email enviado", Toast.LENGTH_SHORT);
+                                    toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
+                                    toast.show();
+                                } else {
+                                    Toast toast = Toast.makeText(getApplicationContext(), "Falha ao enviar email", Toast.LENGTH_SHORT);
+                                    toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
+                                    toast.show();
+                                }
 
-                        try {
-
-                            if(mail.send()){
-                                Toast toast = Toast.makeText(getApplicationContext(), "Email enviado", Toast.LENGTH_SHORT);
-                                toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
-                                toast.show();
-                            }else{
-                                Toast toast = Toast.makeText(getApplicationContext(), "Falha ao enviar email", Toast.LENGTH_SHORT);
-                                toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
-                                toast.show();
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
 
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                            clienteDao.lista();
+
+                            finish();
                         }
 
-                        clienteDao.lista();
 
 
-
-
-
-
-                        finish();
                     }
                 }
 
@@ -154,11 +153,34 @@ public class cadastramento extends AppCompatActivity {
                             empty = true;
                             field.setError("campo deve ser preexido");
                         }
-
-
                     }
 
                     return empty;
+                }
+
+
+                public boolean serviceValidaEmail(EditText email) {
+                    VerificadorEmail verificadorEmail = new VerificadorEmail();
+                    EmailDAO emailDAO = new EmailDAO();
+
+                    verificadorEmail = emailDAO.verifica(email);
+
+
+                    if(verificadorEmail.getFree() == "false" && verificadorEmail.getFormat_Valid() == "false"){
+
+                        Toast toast = Toast.makeText(getApplicationContext(), "Email invalido", Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
+                        toast.show();
+
+                        email.setText("");
+                        email.setError("preenxa com email valido");
+
+                        return false;
+                    }
+
+                    return true;
+
+
                 }
 
             });
@@ -183,6 +205,7 @@ public class cadastramento extends AppCompatActivity {
 
 
     }
+
 
 
 

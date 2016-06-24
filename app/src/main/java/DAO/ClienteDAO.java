@@ -46,7 +46,7 @@ public class ClienteDAO {
 
     }
 
-    public void salvar(Cliente clienteSalvar){
+    public boolean salvar(Cliente clienteSalvar){
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -56,18 +56,22 @@ public class ClienteDAO {
         //192.168.1.102 casa
         WebTarget webTarget = client.target(Constants.URL+"/clientes").path("/Salvar");
 
-        //feixa conexao
-        Response response = webTarget.path("service").request().get();
-        response.readEntity(String.class);
-        response.close();
-
-
         Gson gson = new Gson();
         String clienteJson = gson.toJson(clienteSalvar);
 
-
         Log.w("Cliente", clienteJson);
-        webTarget.request().post(Entity.json(clienteJson));
+
+        Response retorno;
+        retorno = webTarget.request().post(Entity.json(clienteJson));
+
+        boolean salvou = false;
+        if (retorno != null){
+            salvou = true;
+        }
+
+        return salvou;
+
+
 
 
 

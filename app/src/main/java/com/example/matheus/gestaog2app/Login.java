@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import DAO.UsuarioDAO;
 import MODEL.Usuario;
+import ServiceTempo.ServiceTempoDAO;
+import ServiceTempo.Tempo;
 
 public class Login extends AppCompatActivity {
 
@@ -39,7 +41,7 @@ public class Login extends AppCompatActivity {
 
                     if(user.getUsuario().toString().equals(login.getText().toString()) && user.getSenha().toString().equals(senha.getText().toString())){
 
-                        Toast toast = Toast.makeText(getApplicationContext(), "Bem vindo " + login.getText().toString(), Toast.LENGTH_LONG);
+                        Toast toast = Toast.makeText(getApplicationContext(), "Bem vindo " + user.getNome().toString(), Toast.LENGTH_LONG);
                         toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
                         toast.show();
 

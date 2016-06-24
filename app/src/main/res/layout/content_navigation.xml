@@ -18,12 +18,14 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Temperatura:"
         android:id="@+id/textView5"
-        android:layout_marginTop="53dp"
-        android:layout_marginLeft="57dp"
-        android:layout_marginStart="57dp"
-        android:layout_alignParentTop="false"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentStart="false" />
+        android:layout_marginTop="52dp"
+        android:layout_marginLeft="37dp"
+        android:layout_marginStart="37dp"
+        android:textColor="#363e6b"
+        android:textSize="25dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -31,36 +33,31 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/temperatura"
-        android:layout_alignBottom="@+id/textView5"
-        android:layout_toRightOf="@+id/textView5"
-        android:layout_marginLeft="22dp"
-        android:layout_marginStart="22dp"
+        android:layout_marginLeft="37dp"
+        android:layout_marginStart="37dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:enabled="false"
-        android:editable="false" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Condicao do tempo:"
-        android:id="@+id/textView12"
-        android:layout_below="@+id/textView5"
-        android:layout_alignRight="@+id/textView5"
-        android:layout_alignEnd="@+id/textView5"
-        android:layout_marginTop="37dp" />
+        android:editable="false"
+        android:textColor="#1e2b42"
+        android:textSize="20dp"
+        android:layout_above="@+id/condicao"
+        android:layout_toEndOf="@+id/textView5"
+        android:layout_toRightOf="@+id/textView5" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/condicao"
-        android:layout_alignBottom="@+id/textView12"
-        android:layout_alignLeft="@+id/temperatura"
-        android:layout_alignStart="@+id/temperatura"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:enabled="false"
-        android:editable="false" />
+        android:editable="false"
+        android:layout_below="@+id/textView5"
+        android:layout_marginTop="50dp"
+        android:layout_alignRight="@+id/temperatura"
+        android:layout_alignEnd="@+id/temperatura"
+        android:layout_alignLeft="@+id/textView5"
+        android:layout_alignStart="@+id/textView5"
+        android:textColor="#1e2746"
+        android:textSize="30dp" />
 
 </RelativeLayout>
