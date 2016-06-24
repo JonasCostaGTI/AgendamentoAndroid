@@ -5,14 +5,17 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -41,9 +44,6 @@ public class cadastramento extends AppCompatActivity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.servicos, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         servico.setAdapter(adapter);
-
-
-        //context = this;
 
 
         if (this.getIntent().hasExtra("ID")) {
@@ -88,8 +88,10 @@ public class cadastramento extends AppCompatActivity {
                     boolean emailValidoService = false;
                     emailValidoService = serviceValidaEmail(email);
 
+                    boolean servicoOK = verificaServico(servico);
 
-                    if (!campos(nome, telefone, cpf, data, hora, email) && emailValidoService) {
+
+                    if (!campos(nome, telefone, cpf, data, hora, email) && emailValidoService == true && servicoOK == true) {
 
                         if (alterado){
                             clienteObjeto.setId(id);
@@ -165,9 +167,10 @@ public class cadastramento extends AppCompatActivity {
 
                     verificadorEmail = emailDAO.verifica(email);
 
+                    String free = verificadorEmail.getFree();
+                    String format = verificadorEmail.getFormat_Valid();
 
-                    if(verificadorEmail.getFree() == "false" && verificadorEmail.getFormat_Valid() == "false"){
-
+                    if(free == "false" || format == "false"){
                         Toast toast = Toast.makeText(getApplicationContext(), "Email invalido", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
                         toast.show();
@@ -176,9 +179,11 @@ public class cadastramento extends AppCompatActivity {
                         email.setError("preenxa com email valido");
 
                         return false;
+                    }else{
+                        return true;
                     }
 
-                    return true;
+
 
 
                 }
@@ -206,7 +211,24 @@ public class cadastramento extends AppCompatActivity {
 
     }
 
+    private boolean verificaServico(Spinner servico) {
 
+        if(servico.getSelectedItem().equals("Selecione")){
+
+            Toast toast = Toast.makeText(getApplicationContext(), "Servico Invalido", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
+            toast.show();
+
+            servico.setSelection(0);
+            servico.requestFocus();
+
+            return false;
+        }else{
+            return true;
+        }
+
+
+    }
 
 
     @Override

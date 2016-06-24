@@ -26,12 +26,9 @@ public class ServiceTempoDAO {
         WebTarget webTarget = client.target("http://api.openweathermap.org/data/2.5/weather?q=Gravatai&lang=pt&type=like&units=metric&appid=9c4b5927647bc9947f6f4c2be948cb4e");
         String tempJson = webTarget.request().get(String.class);
 
-
         Tempo temp = new Tempo();
         Gson gson = new Gson();
         temp = gson.fromJson(tempJson, Tempo.class);
-
-        Log.w("Tempo", temp.getMain().getTemp());
 
         return  temp;
 
