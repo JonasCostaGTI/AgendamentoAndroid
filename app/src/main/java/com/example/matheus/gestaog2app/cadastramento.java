@@ -20,6 +20,8 @@ import ServiceAgendamento.ClienteDAO;
 import MODEL.Cliente;
 import ServiceEmail.EmailDAO;
 import ServiceEmail.VerificadorEmail;
+import ServiceTelefone.NumeroTelefone;
+import ServiceTelefone.NumeroTelefoneDAO;
 import email.Mail;
 
 public class cadastramento extends AppCompatActivity {
@@ -85,10 +87,16 @@ public class cadastramento extends AppCompatActivity {
                     boolean emailValidoService = false;
                     emailValidoService = serviceValidaEmail(email);
 
+                    boolean telefoneValido = false;
+                    telefoneValido = validaTelefone(telefone);
+
                     boolean servicoOK = verificaServico(servico);
 
 
-                    if (!campos(nome, telefone, cpf, data, hora, email) && emailValidoService == true && servicoOK == true) {
+                    if (!campos(nome, telefone, cpf, data, hora, email) &&
+                            emailValidoService == true &&
+                            servicoOK == true &&
+                            telefoneValido == true) {
 
                         if (alterado){
                             clienteObjeto.setId(id);
@@ -102,10 +110,10 @@ public class cadastramento extends AppCompatActivity {
                         clienteObjeto.setHorario(hora.getText().toString());
                         clienteObjeto.setDia(data.getText().toString());
 
-                        boolean salvou;
-                        salvou = clienteDao.salvar(clienteObjeto);
 
-                        if(salvou) {
+
+
+                        if(clienteDao.salvar(clienteObjeto)) {
 
                             Mail mail = new Mail();
                             String[] toArr = {"jonas.costa1987@gmail.com", clienteObjeto.getEmail()};
@@ -135,6 +143,11 @@ public class cadastramento extends AppCompatActivity {
                             clienteDao.lista();
 
                             finish();
+                        }else{
+                            Toast toast = Toast.makeText(getApplicationContext(), "Falha ao tentar agendar horario", Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
+                            toast.show();
+
                         }
 
 
@@ -158,32 +171,7 @@ public class cadastramento extends AppCompatActivity {
                 }
 
 
-                public boolean serviceValidaEmail(EditText email) {
-                    VerificadorEmail verificadorEmail = new VerificadorEmail();
-                    EmailDAO emailDAO = new EmailDAO();
 
-                    verificadorEmail = emailDAO.verifica(email);
-
-                    String free = verificadorEmail.getFree();
-                    String format = verificadorEmail.getFormat_Valid();
-
-                    if(free == "false" || format == "false"){
-                        Toast toast = Toast.makeText(getApplicationContext(), "Email invalido", Toast.LENGTH_SHORT);
-                        toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
-                        toast.show();
-
-                        email.setText("");
-                        email.setError("preenxa com email valido");
-
-                        return false;
-                    }else{
-                        return true;
-                    }
-
-
-
-
-                }
 
             });
 
@@ -204,6 +192,57 @@ public class cadastramento extends AppCompatActivity {
 
 
         }
+
+
+    }
+
+
+
+    public boolean serviceValidaEmail(EditText email) {
+        VerificadorEmail verificadorEmail = new VerificadorEmail();
+        EmailDAO emailDAO = new EmailDAO();
+
+        verificadorEmail = emailDAO.verifica(email);
+
+        String free = verificadorEmail.getFree();
+        String format = verificadorEmail.getFormat_Valid();
+
+        if(free == "false" || format == "false"){
+            Toast toast = Toast.makeText(getApplicationContext(), "Email invalido", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
+            toast.show();
+
+            email.setText("");
+            email.setError("preenxa com email valido");
+
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    private boolean validaTelefone(EditText telefone) {
+
+        NumeroTelefone numeroTelefone = new NumeroTelefone();
+
+        NumeroTelefoneDAO numeroTelefoneDAO = new NumeroTelefoneDAO();
+        numeroTelefone = numeroTelefoneDAO.formatoValido(telefone);
+
+        String valido = numeroTelefone.getValid();
+        if(valido == "false"){
+            Toast toast = Toast.makeText(getApplicationContext(), "Telefone invalido", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
+            toast.show();
+
+            telefone.setText("");
+            telefone.setError("preenxa com Telefone valido");
+            return false;
+
+        } else{
+            return true;
+
+        }
+
 
 
     }
