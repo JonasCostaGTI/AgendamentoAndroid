@@ -182,9 +182,24 @@ public class cadastramento extends AppCompatActivity {
                     public void onClick(View v) {
 
                         clienteObjeto.setId(id);
-                        clienteDao.deletar(clienteObjeto);
-                        clienteDao.lista();
-                        finish();
+                        if(clienteDao.deletar(clienteObjeto)){
+                            Toast toast = Toast.makeText(getApplicationContext(), "Horario excluido com sucesso", Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
+                            toast.show();
+
+                            clienteDao.lista();
+                            finish();
+                        }else{
+                            Toast toast = Toast.makeText(getApplicationContext(), "Falha ao tentar excluir", Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
+                            toast.show();
+
+                            clienteDao.lista();
+                            finish();
+
+                        }
+
+
 
                     }
                 });
@@ -229,7 +244,9 @@ public class cadastramento extends AppCompatActivity {
         numeroTelefone = numeroTelefoneDAO.formatoValido(telefone);
 
         String valido = numeroTelefone.getValid();
-        if(valido == "false"){
+        String carrier = numeroTelefone.getCarrier();
+
+        if(valido == "false" || carrier == ""){
             Toast toast = Toast.makeText(getApplicationContext(), "Telefone invalido", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
             toast.show();
@@ -242,9 +259,6 @@ public class cadastramento extends AppCompatActivity {
             return true;
 
         }
-
-
-
     }
 
     private boolean verificaServico(Spinner servico) {

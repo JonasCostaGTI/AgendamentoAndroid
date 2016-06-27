@@ -74,16 +74,23 @@ public class ClienteDAO {
 
     }
 
-    public void deletar(Cliente clienteDeletar){
+    public boolean deletar(Cliente clienteDeletar){
 
         Client client = ClientBuilder.newClient();
 
-        //192.168.1.102 casa
-        WebTarget webTarget = client.target(Constants.URL+"/clientes");
+        WebTarget webTarget = client.target(Constants.URL + "/clientes");
         WebTarget webTargetExcluir = webTarget.path("{codigo}").resolveTemplate("codigo", clienteDeletar.getId());
 
-        //requisicao para deletar
-        webTargetExcluir.request().delete();
+        Response retorno = webTargetExcluir.request().delete();
+
+        String logStatus =  String.valueOf(retorno.getStatus());
+        String info =  retorno.getStatusInfo().toString();
+
+        if (info.equals("OK")){
+            return true;
+        }else{
+            return false;
+        }
 
     }
 
