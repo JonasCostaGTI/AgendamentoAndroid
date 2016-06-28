@@ -22,6 +22,9 @@ public class Login extends AppCompatActivity {
 
         Button btnEntrar = (Button) findViewById(R.id.btnEntrar);
         assert btnEntrar != null;
+
+
+
         btnEntrar.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View v) {
